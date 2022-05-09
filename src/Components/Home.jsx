@@ -15,7 +15,7 @@ export default function Home() {
                 Authorization: `Bearer ${token}`
             }
         }
-        const promise = axios.get("http://172.27.45.208:5000/historic", config);
+        const promise = axios.get("https://projeto-my-wallet-back.herokuapp.com//historic", config);
         promise.then((resposta) => {
             setHistorico(resposta.data);
             setFlag(resposta.data.transaction);

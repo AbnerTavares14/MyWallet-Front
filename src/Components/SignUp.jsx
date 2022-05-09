@@ -12,7 +12,7 @@ export default function SignUp() {
 
     function fazerCadastro(event) {
         event.preventDefault();
-        const promessa = axios.post("http://172.27.45.208:5000/sign-up", {
+        const promessa = axios.post("https://projeto-my-wallet-back.herokuapp.com/sign-up", {
             name: nome,
             email,
             password: senha,

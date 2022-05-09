@@ -17,7 +17,7 @@ export default function Saida() {
                 Authorization: `Bearer ${token}`
             }
         }
-        const promise = axios.post("http://172.27.45.208:5000/out", {
+        const promise = axios.post("https://projeto-my-wallet-back.herokuapp.com/out", {
             value: valor,
             describe: descricao
         }, config);

@@ -17,7 +17,7 @@ export default function Entrada() {
                 Authorization: `Bearer ${token}`
             }
         }
-        const promise = axios.post("http://172.27.45.208:5000/in", {
+        const promise = axios.post("https://projeto-my-wallet-back.herokuapp.com/in", {
             value: valor,
             describe: descricao
         }, config);
