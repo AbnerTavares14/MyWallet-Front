@@ -3,7 +3,6 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import UserContext from "../Contexts/UserContext";
-import Tipo from "./Tipo";
 
 export default function Home() {
     const { token } = useContext(UserContext);
@@ -26,14 +25,14 @@ export default function Home() {
         });
     }, [token]);
 
-    console.log(historico)
-
     return flag.length < 2 ? (
         <>
             <Body>
                 <Header>
                     <h1>Olá, {historico.name}</h1>
-                    <ion-icon name="log-out-outline"></ion-icon>
+                    <Link to={"/"}>
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </Link>
                 </Header>
                 <Extrato>
                     <SemRegistros>
@@ -63,7 +62,9 @@ export default function Home() {
                 <Body>
                     <Header>
                         <h1>Olá, {historico.name}</h1>
-                        <ion-icon name="log-out-outline"></ion-icon>
+                        <Link to={"/"}>
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </Link>
                     </Header>
                     <Extrato>
                         <Registros>
@@ -72,6 +73,7 @@ export default function Home() {
                                     return (
                                         <div>
                                             <In>
+                                                <h3>{item.date}</h3>
                                                 <p>{item.describe}</p>
                                                 <h2>{item.value}</h2>
                                             </In>
@@ -81,6 +83,7 @@ export default function Home() {
                                     return (
                                         <div>
                                             <Out>
+                                                <h3>{item.date}</h3>
                                                 <p>{item.describe}</p>
                                                 <h2>{item.value}</h2>
                                             </Out>
@@ -89,6 +92,10 @@ export default function Home() {
                                 }
                             })
                             }
+                            <Saldo>
+                                <h1>SALDO</h1>
+                                <h2>{historico.balance}</h2>
+                            </Saldo>
                         </Registros>
                     </Extrato>
                     <Footer>
@@ -110,38 +117,69 @@ export default function Home() {
         )
 }
 
+const Saldo = styled.div`
+    position: absolute;
+    bottom: 0;
+    width: 320px;
+    h1{
+        font-family: 'Raleway', sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #000000;
+        margin-right: 200px;
+    }
+    h2{
+        font-family: 'Raleway', sans-serif;
+        color: #03AC00;
+        font-size: 17px;
+    }
+`
+
 const In = styled.div`
-    /* display: flex;
-    justify-content: space-between; */
     box-sizing: border-box;
     padding: 10px;
     p{
         font-family: 'Raleway', sans-serif;
         font-size: 16px;
         color: #000;
+        margin-right: 60px;
     }
 
     h2{
         font-family: 'Raleway', sans-serif;
         font-size: 16px;
         color: #03AC00;
+        margin-left: 30px;        
+    }
+
+    h3 {
+        font-family: 'Raleway', sans-serif;
+        color: #C6C6C6;
+        font-size: 16px;
+        margin-right: 90px;
     }
 `
 const Out = styled.div`
-    /* display: flex;
-    justify-content: space-between; */
     box-sizing: border-box;
-    padding: 10px;
     p{
         font-family: 'Raleway', sans-serif;
         font-size: 16px;
         color: #000;
+        margin-right: 60px;
     }
 
     h2{
         font-family: 'Raleway', sans-serif;
         font-size: 16px;
         color: #C70000;
+        margin-left: 30px; 
+    }
+
+    h3 {
+        font-family: 'Raleway', sans-serif;
+        color: #C6C6C6;
+        font-size: 16px;
+        margin-right: 90px;
     }
 `
 
@@ -232,8 +270,13 @@ const Registros = styled.div`
     background-color: #fff;
     border-radius: 5px;
     position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     div {
         display: flex;
+        justify-content: center;
+        padding: 10px;
     }
 `
 
